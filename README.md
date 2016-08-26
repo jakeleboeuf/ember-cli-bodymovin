@@ -28,7 +28,7 @@ Sometimes you may need or want to host your animation json somewhere else. No pr
 You can use any of the Bodymovin.js primitives in your Component/Controller. [Check them out](https://github.com/bodymovin/bodymovin#usage).
 
 ```hbs
-// templates/component/playPause-animation.hbs
+{{!-- templates/component/playPause-animation.hbs --}}
 
 {{body-movin
 	path='reel'
