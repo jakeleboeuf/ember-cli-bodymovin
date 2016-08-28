@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['bodymovin'],
 
+  path: null,
   loop: true,
   autoplay: true,
   prerender: true,
@@ -10,7 +11,6 @@ export default Ember.Component.extend({
   renderType: "svg",
 
   setupBodymovin: Ember.on('didInsertElement', function() {
-
     let animation = bodymovin.loadAnimation({
       container: document.getElementById(this.get('elementId')),
       autoloadSegments: this.get('autoloadSegments'),
@@ -18,7 +18,7 @@ export default Ember.Component.extend({
       prerender: this.get('prerender'),
       autoplay: this.get('autoplay'),
       loop: this.get('loop'),
-      path: (!this.get('external')) ? `animations/${this.get('animation')}.json` : this.get('animation') 
+      path: (!this.get('external')) ? `animations/${this.get('path')}.json` : this.get('path') 
     });
 
     this.sendAction('onReady', animation);
