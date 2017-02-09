@@ -23,12 +23,14 @@ module.exports = {
 
     this.ui.writeLine("Let's get bodymovin!");
 
-    app.import('vendor/bodymovin/bodymovin.min.js');
-    app.import('vendor/vimeo.js');
+    if (process.env.EMBER_CLI_FASTBOOT) {
+      app.import('vendor/bodymovin/bodymovin.min.js');
+      app.import('vendor/vimeo.js');
 
-    app.import(app.bowerDirectory + '/video.js/dist/video-js.min.css');
-    app.import(app.bowerDirectory + '/video.js/dist/video.min.js');
-    app.import(app.bowerDirectory + '/video.js/dist/video-js.min.css');
+      app.import(app.bowerDirectory + '/video.js/dist/video-js.min.css');
+      app.import(app.bowerDirectory + '/video.js/dist/video.min.js');
+      app.import(app.bowerDirectory + '/video.js/dist/video-js.min.css');
+    }
 
   },
 
