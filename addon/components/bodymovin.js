@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   setSubframe: false,
   autoloadSegments: true,
   renderType: "svg",
+  animation: null,
 
   setupBodymovin: Ember.on('didInsertElement', function() {
 
@@ -25,11 +26,13 @@ export default Ember.Component.extend({
     });
 
     this.sendAction('onReady', animation);
+    this.set('animation', animation);
 
   }),
 
   teardownBodymovin: Ember.on('willDestroyElement', function() {
-    this.get('bodymovin').destroy();
+    bodymovin.destroy();
+    this.get('animation').destroy();
   })
 
 });
