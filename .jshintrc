@@ -1,6 +1,7 @@
 {
   "predef": [
     "bodymovin",
+    "Vimeo",
     "document",
     "window",
     "-Promise"

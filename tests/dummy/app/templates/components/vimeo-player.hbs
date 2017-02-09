@@ -1,0 +1,11 @@
+{{yield}}
+<div class="video-player state-{{if state.paused 'paused' 'playing'}}">
+  <div class="video-player--image">
+    <img {{action 'playVideo'}} data-video-id="{{vimeoId}}">
+  </div>
+  <div class="video-player--embed embed-responsive embed-responsive-16by9" style="display:none;">
+    <div id="video-container"></div>
+  </div>
+  {{play-button class="video-player--button"}}
+</div>
+<p>Just pretend there are no controls ;)</p>

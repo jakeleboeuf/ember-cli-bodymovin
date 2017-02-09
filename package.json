@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-bodymovin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A little Ember.js addon to handle svg/canvas animations from After Effects, using Bodymovin.",
   "directories": {
     "doc": "doc",
@@ -22,7 +22,10 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
+    "broccoli-funnel": "^1.1.0",
+    "broccoli-merge-trees": "^1.2.1",
     "ember-ajax": "^2.0.1",
+    "ember-browserify": "1.1.13",
     "ember-cli": "2.8.0-beta.3",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-dependency-checker": "^1.2.0",
@@ -31,6 +34,7 @@
     "ember-cli-jshint": "^1.0.0",
     "ember-cli-qunit": "^2.1.0",
     "ember-cli-release": "^0.2.9",
+    "ember-cli-sass": "5.5.1",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
@@ -38,12 +42,14 @@
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
+    "ember-network": "0.3.0",
     "ember-resolver": "^2.0.3",
-    "ember-welcome-page": "^1.0.1",
-    "loader.js": "^4.0.1"
+    "loader.js": "^4.0.1",
+    "resolve": "^1.2.0"
   },
   "keywords": [
     "ember-addon",
+    "bodymovin",
     "svg",
     "animation",
     "canvas",
@@ -52,6 +58,7 @@
     "player"
   ],
   "dependencies": {
+    "bodymovin": "^4.5.4",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.3"
   },

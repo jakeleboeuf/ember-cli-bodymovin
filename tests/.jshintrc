@@ -1,6 +1,7 @@
 {
   "predef": [
     "document",
+    "Vimeo",
     "window",
     "location",
     "setTimeout",
