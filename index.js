@@ -23,7 +23,7 @@ module.exports = {
 
     this.ui.writeLine("Let's get bodymovin!");
 
-    if (process.env.EMBER_CLI_FASTBOOT) {
+    if (!process.env.EMBER_CLI_FASTBOOT) {
       app.import('vendor/bodymovin/bodymovin.min.js');
       app.import('vendor/vimeo.js');
 
