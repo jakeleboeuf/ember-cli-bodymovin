@@ -31,7 +31,6 @@ export default Ember.Component.extend({
   }),
 
   teardownBodymovin: Ember.on('willDestroyElement', function() {
-    bodymovin.destroy();
     this.get('animation').destroy();
   })
 
