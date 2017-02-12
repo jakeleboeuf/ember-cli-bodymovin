@@ -3,7 +3,9 @@
 
     <div class="example test-local">
         <h3>Local data source</h3>
-        {{body-movin path='loading' class='loader'}}
+        {{#body-movin path='loading' class='loader'}}
+            Fallback Goes here
+        {{/body-movin}}
     </div>
 
     <div class="example test-local">
