@@ -21,15 +21,8 @@ module.exports = {
   included: function(app) {
     this._super.included(app);
 
-    this.ui.writeLine("Let's get bodymovin!");
-
     if (!process.env.EMBER_CLI_FASTBOOT) {
       app.import('vendor/bodymovin/bodymovin.min.js');
-      app.import('vendor/vimeo.js');
-
-      app.import(app.bowerDirectory + '/video.js/dist/video-js.min.css');
-      app.import(app.bowerDirectory + '/video.js/dist/video.min.js');
-      app.import(app.bowerDirectory + '/video.js/dist/video-js.min.css');
     }
 
   },
