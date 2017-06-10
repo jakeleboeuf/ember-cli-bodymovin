@@ -1,9 +1,11 @@
 /* jshint node: true */
 'use strict';
 var path = require("path");
+
 var resolve = require("resolve");
 var Funnel = require('broccoli-funnel');
 var MergeTrees = require('broccoli-merge-trees');
+var fbTransform = require('fastboot-transform');
 
 module.exports = {
   name: 'bodymovin',
@@ -15,15 +17,13 @@ module.exports = {
       destDir: '/bodymovin',
     });
 
-    return new MergeTrees([tree, tcpTree]);
+    return new MergeTrees([tree, fbTransform(tcpTree)]);
   },
 
   included: function(app) {
     this._super.included(app);
 
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import('vendor/bodymovin/bodymovin.min.js');
-    }
+    app.import('vendor/bodymovin/bodymovin.min.js');
 
   },
 
