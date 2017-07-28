@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-bodymovin",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.1.0",
+  "description": "A little Ember.js addon to handle svg/canvas animations from After Effects, using Bodymovin.",
   "keywords": [
     "ember-addon"
   ],
