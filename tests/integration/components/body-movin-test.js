@@ -1,15 +1,13 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('body-movin', 'Integration | Component | body movin', {
   integration: true
 });
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
+test('should renders', function(assert) {
   this.render(hbs`{{body-movin path="loading"}}`);
 
   assert.equal(this.$().text().trim(), '');
@@ -24,17 +22,55 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim(), 'template block text');
 });
 
-test('it renders as svg', function(assert) {
-  this.render(hbs`{{body-movin path="loading" renderType="svg"}}`);
+test('should renders as svg by default', function(assert) {
+  this.render(hbs`{{body-movin path="loading"}}`);
 
   return wait().then(() => {
     assert.equal(this.$('svg').length, 1);
   });
 });
 
+test('should renders as svg when set', function(assert) {
+  this.render(hbs`{{body-movin path="loading"}}`);
+
+  return wait().then(() => {
+    assert.equal(this.$('svg').length, 1);
+  });
+});
+
+test("should send a setup action when it's ready", function(assert) {
+  assert.expect(2);
+  this.set('state', 'waiting');
+
+  assert.equal(this.get('state'), 'waiting');
+
+  this.render(
+    hbs`{{body-movin path="loading" setup=(action (mut state) 'ready')}}`
+  );
+
+  assert.equal(this.get('state'), 'ready');
+});
+
+test('should respond to multiple click events', function(assert) {
+  assert.expect(3);
+
+  this.set('state', 'playing');
+  assert.equal(this.get('state'), 'playing');
+
+  this.render(
+    hbs`{{body-movin path="loading" click=(action (mut state) 'paused')}}`
+  );
+
+  Ember.run(() => document.querySelector('.bodymovin').click());
+  assert.equal(this.get('state'), 'paused');
+
+  this.set('state', 'broke');
+  Ember.run(() => document.querySelector('.bodymovin').click());
+  assert.equal(this.get('state'), 'paused');
+});
+
 // test('it renders as canvas', function(assert) {
 //   this.render(hbs`{{body-movin path="loading" renderType="canvas"}}`);
-
 
 //   return wait().then(() => {
 //     let canvas = this.$('canvas').get(0);
@@ -42,5 +78,4 @@ test('it renders as svg', function(assert) {
 //     this.clearRender();
 //     assert.notEqual(canvas, undefined);
 //   });
-
 // });
