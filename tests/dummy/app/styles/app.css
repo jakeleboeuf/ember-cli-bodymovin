@@ -1,0 +1,15 @@
+body, html {
+  margin: 0;
+}
+
+.fill-path--white svg path {
+  fill: #ffffff;
+}
+
+.fill--white svg {
+  fill: #ffffff;
+}
+
+.fill-stroke--white svg {
+  stroke: #ffffff;
+}

@@ -1,0 +1,33 @@
+machine:
+  node:
+    version: "6.11.0"
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+
+dependencies:
+  pre:
+    - sudo apt-get update; sudo apt-get install -y --only-upgrade google-chrome-stable
+    - rm -rf ~/.yarn node_modules/npm
+    - npm install -g yarn
+    - yarn add global codeclimate-test-reporter
+    - yarn -v
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
+
+test:
+  post:
+    - codeclimate-test-reporter < 'coverage/lcov.info'
+  override:
+    - yarn test
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: arcade-realthread-staging
+  production:
+    branch: production
+    heroku:
+      appname: arcade-realthread

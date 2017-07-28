@@ -1,3 +1,18 @@
-<h2 id="title">Welcome to Ember</h2>
-
-{{outlet}}
+<div style="height: 100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;background:url(/images/map-image@3x.jpg) #dddddd; background-size:cover;background-position:center;">
+  <div style="width:100%;max-width: 640px;height:auto;max-height:444px;">
+    {{body-movin path='uber-card' loop=false}}
+  </div>
+  <h3 style="color: rgba(0,0,0,0.3);font-family: helvetica, 'sans serif'">Animation by <a href="http://davidstanfieldis.me" style="text-decoration: none;color:#000">David Stanfield</a></h3>
+</div>
+<div style="height: 100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;background:#222222">
+  <div style="width: 32px;">
+    {{body-movin path='loading' class="fill-path--white"}}
+  </div>
+  <h3 style="color: rgba(255,255,255,0.2);font-family: helvetica, 'sans serif'">Animation by <a href="http://thefurrow.tv" style="text-decoration: none;color:#fff">The Furrow</a></h3>
+</div>
+<div style="height: 100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;background:#00ddaa;">
+  <div style="width: 32px;">
+    {{menu-example}}
+  </div>
+  <h3 style="color: rgba(255,255,255,0.6);font-family: helvetica, 'sans serif'">Animation by <a href="http://davidstanfieldis.me" style="text-decoration: none;color:#fff">David Stanfield</a></h3>
+</div>
