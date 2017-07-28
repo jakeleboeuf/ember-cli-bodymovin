@@ -1,12 +1,13 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('body-movin', 'Integration | Component | body movin', {
   integration: true
 });
 
-test('should renders', function(assert) {
+test('should render', function(assert) {
   this.render(hbs`{{body-movin path="loading"}}`);
 
   assert.equal(this.$().text().trim(), '');
@@ -19,6 +20,31 @@ test('should renders', function(assert) {
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');
+});
+
+test('should render an external path', function(assert) {
+  // TODO fix cors rules on s3
+  this.render(hbs`{{body-movin path="https://bodymovin.s3.amazonaws.com/menu.json" external=true}}`);
+
+  return wait().then(() => {
+    assert.equal(this.$('svg').length, 1);
+  });
+});
+
+test('should renders as svg by default', function(assert) {
+  this.render(hbs`{{body-movin path="loading"}}`);
+
+  return wait().then(() => {
+    assert.equal(this.$('svg').length, 1);
+  });
+});
+
+test('should renders as svg when set', function(assert) {
+  this.render(hbs`{{body-movin path="loading"}}`);
+
+  return wait().then(() => {
+    assert.equal(this.$('svg').length, 1);
+  });
 });
 
 test("should send a setup action when it's ready", function(assert) {
