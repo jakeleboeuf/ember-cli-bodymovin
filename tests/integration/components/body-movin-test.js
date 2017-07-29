@@ -36,10 +36,10 @@ test('should render as svg by default', function(assert) {
   this.render(hbs`{{body-movin path="loading"}}`);
   let done = assert.async();
 
-  return wait().then(() => {
+  setTimeout(() => {
     assert.equal(this.$('svg').length, 1);
     done();
-  });
+  }, 1000);
 });
 
 test('should render as svg when set', function(assert) {
