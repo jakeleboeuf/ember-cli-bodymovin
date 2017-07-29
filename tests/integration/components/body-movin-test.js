@@ -1,6 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('body-movin', 'Integration | Component | body movin', {
   integration: true
@@ -21,34 +22,38 @@ test('should render', function(assert) {
   assert.equal(this.$().text().trim(), 'template block text');
 });
 
+test('should render as svg by default', function(assert) {
+  this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true}}`);
+  let done = assert.async();
+
+  setTimeout(() => {
+    assert.equal(this.$('svg').length, 1);
+    bodymovin.destroy();
+    this.clearRender();
+    done();
+  }, 2000);
+});
+
 test('should render an external path', function(assert) {
   this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true}}`);
   let done = assert.async();
 
   setTimeout(() => {
     assert.equal(this.$('svg').length, 1);
-    done();
-  }, 2000);
-});
-
-test('should render as svg by default', function(assert) {
-  this.render(hbs`{{body-movin path="menu"}}`);
-  let done = assert.async();
-
-  setTimeout(() => {
-    assert.equal(this.$('svg').length, 1);
+    bodymovin.destroy();
+    this.clearRender();
     done();
   }, 2000);
 });
 
 test('should render as svg when set', function(assert) {
-  this.render(hbs`{{body-movin path="menu"}}`);
-  let done = assert.async();
+  this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true renderType="svg"}}`);
 
-  setTimeout(() => {
-    assert.equal(this.$('svg').length, 1);
-    done();
-  }, 2000);
+  return wait().then(() => {
+    assert.notEqual(this.$('svg').length, 0);
+    bodymovin.destroy();
+    this.clearRender();
+  });
 });
 
 test("should send a setup action when ready", function(assert) {
