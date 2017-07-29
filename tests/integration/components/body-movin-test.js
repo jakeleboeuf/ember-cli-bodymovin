@@ -1,7 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
-import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('body-movin', 'Integration | Component | body movin', {
   integration: true
