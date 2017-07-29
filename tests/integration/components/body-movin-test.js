@@ -23,12 +23,13 @@ test('should render', function(assert) {
 });
 
 test('should render an external path', function(assert) {
-  // TODO fix cors rules on s3
   this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true}}`);
+  let done = assert.async();
 
-  return wait().then(() => {
+  setTimeout(() => {
     assert.equal(this.$('svg').length, 1);
-  });
+    done();
+  }, 1000);
 });
 
 test('should render as svg by default', function(assert) {
