@@ -28,27 +28,27 @@ test('should render an external path', function(assert) {
   setTimeout(() => {
     assert.equal(this.$('svg').length, 1);
     done();
-  }, 1000);
+  }, 2000);
 });
 
 test('should render as svg by default', function(assert) {
-  this.render(hbs`{{body-movin path="loading"}}`);
+  this.render(hbs`{{body-movin path="menu"}}`);
   let done = assert.async();
 
   setTimeout(() => {
     assert.equal(this.$('svg').length, 1);
     done();
-  }, 1000);
+  }, 2000);
 });
 
 test('should render as svg when set', function(assert) {
-  this.render(hbs`{{body-movin path="loading"}}`);
+  this.render(hbs`{{body-movin path="menu"}}`);
   let done = assert.async();
 
   setTimeout(() => {
     assert.equal(this.$('svg').length, 1);
     done();
-  }, 1000);
+  }, 2000);
 });
 
 test("should send a setup action when ready", function(assert) {

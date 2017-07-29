@@ -15,7 +15,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "COVERAGE=true ember try:each"
+    "test": "COVERAGE=true ember test"
   },
   "dependencies": {
     "bodymovin": "^4.9.0",
