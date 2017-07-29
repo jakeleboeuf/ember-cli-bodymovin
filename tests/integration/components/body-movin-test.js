@@ -24,14 +24,14 @@ test('should render', function(assert) {
 
 test('should render an external path', function(assert) {
   // TODO fix cors rules on s3
-  this.render(hbs`{{body-movin path="https://bodymovin.s3.amazonaws.com/menu.json" external=true}}`);
+  this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true}}`);
 
   return wait().then(() => {
     assert.equal(this.$('svg').length, 1);
   });
 });
 
-test('should renders as svg by default', function(assert) {
+test('should render as svg by default', function(assert) {
   this.render(hbs`{{body-movin path="loading"}}`);
 
   return wait().then(() => {
@@ -39,7 +39,7 @@ test('should renders as svg by default', function(assert) {
   });
 });
 
-test('should renders as svg when set', function(assert) {
+test('should render as svg when set', function(assert) {
   this.render(hbs`{{body-movin path="loading"}}`);
 
   return wait().then(() => {
@@ -47,7 +47,7 @@ test('should renders as svg when set', function(assert) {
   });
 });
 
-test("should send a setup action when it's ready", function(assert) {
+test("should send a setup action when ready", function(assert) {
   assert.expect(2);
   this.set('state', 'waiting');
 
@@ -58,6 +58,20 @@ test("should send a setup action when it's ready", function(assert) {
   );
 
   assert.equal(this.get('state'), 'ready');
+});
+
+test('should respond to a click event', function(assert) {
+  assert.expect(2);
+
+  this.set('state', 'playing');
+  assert.equal(this.get('state'), 'playing');
+
+  this.render(
+    hbs`{{body-movin path="loading" click=(action (mut state) 'paused')}}`
+  );
+
+  Ember.run(() => document.querySelector('.bodymovin').click());
+  assert.equal(this.get('state'), 'paused');
 });
 
 test('should respond to multiple click events', function(assert) {
