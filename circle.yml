@@ -7,7 +7,7 @@ machine:
 dependencies:
   pre:
     - sudo apt-get update; sudo apt-get install -y --only-upgrade google-chrome-stable
-    - nmp install global codeclimate-test-reporter
+    - npm install global codeclimate-test-reporter
 
 test:
   post:
