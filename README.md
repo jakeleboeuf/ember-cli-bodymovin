@@ -1,10 +1,11 @@
 [![NPM][npm-badge-img]][npm-badge-link]
+[![Code Climate][codeclimate-badge]][codeclimate-url]
+[![Coverage Status][coverage-badge]][coverage-url]
 [![Ember Observer Score][ember-observer-badge]][ember-observer-url]
-![Ember Version][ember-version]
 
 # ember-cli-bodymovin
 
-A little wrapper for [Bodymovin](https://github.com/bodymovin/bodymovin), an After Effects plugin for exporting animations to svg/canvas/html + js. This is still in development, so be warned!
+A little wrapper for [Bodymovin](https://github.com/bodymovin/bodymovin), an After Effects plugin for exporting animations to svg/canvas/html + js.
 
 ## Installation
 
@@ -87,6 +88,7 @@ You can override all the default stuff as you'd expect.
 	renderStyle='canvas'
 	autoplay=false
 	autorender=true
+	rendererSettings=myRendererSettings
 	click=(action 'submit') // Handle in your component/controller
 	setup=(action 'mySetup') // Handle in your component/controller
 }}
@@ -100,6 +102,19 @@ Set this to true if you're including an external source as your `path`.
 
 #### renderType (String)
 Set to 'svg' / 'canvas' / 'html' to set the renderer. If you leave it of, we'll default to our favorite- `SVG`.
+
+#### rendererSettings (Object)
+Some additional renderer settings for max control.
+```
+rendererSettings: {
+  context: canvasContext, // the canvas context
+  scaleMode: 'noScale',
+  clearCanvas: false,
+  progressiveLoad: false, // Boolean, only svg renderer, loads dom elements when needed. Might speed up initialization for large number of elements.
+  hideOnTransparent: true //Boolean, only svg renderer, hides elements when opacity reaches 0 (defaults to true)
+}
+```
+
 
 #### loop (String)
 true / false / number
@@ -134,5 +149,7 @@ For more information on using ember-cli, visit [http://ember-cli.com/](http://em
 [npm-badge-link]: http://badge.fury.io/js/ember-cli-bodymovin
 [ember-observer-badge]: http://emberobserver.com/badges/ember-cli-bodymovin.svg
 [ember-observer-url]: http://emberobserver.com/addons/ember-cli-bodymovin
-[ember-version]: https://embadge.io/v1/badge.svg?start=0.0.1
-
+[codeclimate-badge]: https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin
+[coverage-badge]: https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin/badges/coverage.svg
+[coverage-url]: https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin/coverage
