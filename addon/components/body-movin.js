@@ -5,28 +5,30 @@ export default Ember.Component.extend({
   layout,
   classNames: ['bodymovin'],
 
-  path: null,
-  loop: true,
-  autoplay: true,
-  prerender: false,
-  setSubframe: false,
-  autoloadSegments: true,
-  renderType: 'svg',
   animation: null,
+  autoloadSegments: true,
+  autoplay: true,
+  loop: true,
+  path: null,
+  prerender: false,
+  renderType: 'svg',
+  rendererSettings: {},
+  setSubframe: false,
 
   didInsertElement() {
     this._super(...arguments);
     let animation = bodymovin.loadAnimation({
-      wrapper: document.getElementById(this.get('elementId')),
       autoloadSegments: this.get('autoloadSegments'),
-      renderer: this.get('renderType'),
-      prerender: this.get('prerender'),
-      setSubframe: this.get('setSubframe'),
       autoplay: this.get('autoplay'),
       loop: this.get('loop'),
       path: !this.get('external')
         ? `animations/${this.get('path')}.json`
-        : this.get('path')
+        : this.get('path'),
+      prerender: this.get('prerender'),
+      renderer: this.get('renderType'),
+      rendererSettings: this.get('rendererSettings'),
+      setSubframe: this.get('setSubframe'),
+      wrapper: document.getElementById(this.get('elementId'))
     });
 
     this.sendAction('setup', animation);
