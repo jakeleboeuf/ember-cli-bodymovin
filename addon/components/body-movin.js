@@ -18,7 +18,7 @@ export default Ember.Component.extend({
 
   state: {
     direction: -1,
-    playing: false
+    playing: true
   },
 
   didInsertElement() {
@@ -58,10 +58,10 @@ export default Ember.Component.extend({
   actions: {
     reverse() {
       let animation = this.get('animation');
-      let direction = this.get('state.direction')
+      let direction = this.get('state.direction') * -1;
 
-      animation.setDirection((direction * -1))
-      this.set('state.direction', (direction * -1));
+      animation.setDirection(direction)
+      this.set('state.direction', direction);
 
       animation.play();
     },
