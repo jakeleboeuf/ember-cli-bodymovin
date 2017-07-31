@@ -14,6 +14,12 @@ export default Ember.Component.extend({
   renderType: 'svg',
   rendererSettings: {},
   setSubframe: false,
+  clickAction: null,
+
+  state: {
+    direction: -1,
+    playing: false
+  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -39,5 +45,39 @@ export default Ember.Component.extend({
     this._super(...arguments);
     this.get('animation').destroy();
     bodymovin.destroy();
+  },
+
+  click() {
+    let clickAction = this.get('clickAction');
+
+    if (clickAction) {
+      this.send(clickAction);
+    }
+  },
+
+  actions: {
+    reverse() {
+      let animation = this.get('animation');
+      let direction = this.get('state.direction')
+
+      animation.setDirection((direction * -1))
+      this.set('state.direction', (direction * -1));
+
+      animation.play();
+    },
+
+    toggle() {
+      let animation = this.get('animation');
+      let state = this.get('state');
+
+      if (state.playing) {
+        animation.pause();
+        this.set('state.playing', false);
+      } else {
+        animation.play();
+        this.set('state.playing', true);
+      }
+    }
+
   }
 });

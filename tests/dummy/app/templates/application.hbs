@@ -11,8 +11,14 @@
   <h3 style="color: rgba(255,255,255,0.2);font-family: helvetica, 'sans serif'">Animation by <a href="http://thefurrow.tv" style="text-decoration: none;color:#fff">The Furrow</a></h3>
 </div>
 <div style="height: 100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;background:#00ddaa;">
-  <div style="width: 32px;">
-    {{menu-example}}
+  <div style="width: 32px;cursor:pointer;">
+    {{body-movin clickAction="reverse" path='menu' loop=false autoplay=false}}
   </div>
   <h3 style="color: rgba(255,255,255,0.6);font-family: helvetica, 'sans serif'">Animation by <a href="http://davidstanfieldis.me" style="text-decoration: none;color:#fff">David Stanfield</a></h3>
+</div>
+<div style="height: 100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;">
+  <div style="cursor:pointer;">
+    {{body-movin clickAction="toggle" path='starwars'}}
+  </div>
+  <h3 style="color: rgba(0,0,0,0.6);font-family: helvetica, 'sans serif'">Animation by <a href="https://twitter.com/davecounts" style="text-decoration: none;color:#000">Dave Counts</a></h3>
 </div>
