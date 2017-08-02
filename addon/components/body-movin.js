@@ -28,7 +28,7 @@ export default Ember.Component.extend({
       autoplay: this.get('autoplay'),
       loop: this.get('loop'),
       path: !this.get('external')
-        ? `animations/${this.get('path')}.json`
+        ? `/animations/${this.get('path')}.json`
         : this.get('path'),
       prerender: this.get('prerender'),
       renderer: this.get('renderType'),
