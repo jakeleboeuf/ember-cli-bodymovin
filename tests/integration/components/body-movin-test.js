@@ -23,34 +23,42 @@ test('should render', function(assert) {
 });
 
 test('should render as svg by default', function(assert) {
-  this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true}}`);
-  let done = assert.async();
+  this.render( hbs`{{body-movin path="starwars" setup=(action (mut animation))}}`);
 
-  setTimeout(() => {
-    assert.equal(this.$('svg').length, 1);
+  return wait().then(() => {
+    assert.equal(this.get('animation').animType, 'svg');
     bodymovin.destroy();
     this.clearRender();
-    done();
-  }, 2000);
+  });
 });
 
 test('should render an external path', function(assert) {
-  this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true}}`);
-  let done = assert.async();
+  this.render( hbs`{{body-movin path="starwars" setup=(action (mut animation))}}`);
 
-  setTimeout(() => {
-    assert.equal(this.$('svg').length, 1);
+  return wait().then(() => {
+    assert.equal(this.get('animation').animType, 'svg');
     bodymovin.destroy();
     this.clearRender();
-    done();
-  }, 2000);
+  });
 });
 
 test('should render as svg when set', function(assert) {
-  this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true renderType="svg"}}`);
+  this.render( hbs`{{body-movin renderType='svg' path="starwars" setup=(action (mut animation))}}`);
 
   return wait().then(() => {
-    assert.notEqual(this.$('svg').length, 0);
+    assert.equal(this.get('animation').animType, 'svg');
+    bodymovin.destroy();
+    this.clearRender();
+  });
+});
+
+test('should render as canvas when set', function(assert) {
+  this.render(
+    hbs`{{body-movin renderType='canvas' path="filter" setup=(action (mut animation))}}`
+  );
+
+  return wait().then(() => {
+    assert.equal(this.get('animation').animType, 'canvas');
     bodymovin.destroy();
     this.clearRender();
   });
@@ -101,13 +109,72 @@ test('should respond to multiple click events', function(assert) {
   assert.equal(this.get('state'), 'paused');
 });
 
-// test('it renders as canvas', function(assert) {
-//   this.render(hbs`{{body-movin path="loading" renderType="canvas"}}`);
+test('should change animation direction when `clickAction` is set to `reverse`', function(assert) {
+  assert.expect(2);
 
-//   return wait().then(() => {
-//     let canvas = this.$('canvas').get(0);
-//     bodymovin.destroy();
-//     this.clearRender();
-//     assert.notEqual(canvas, undefined);
-//   });
-// });
+  this.render(
+    hbs`{{body-movin autoplay=false loop=false path="loading" setup=(action (mut animation)) clickAction='reverse'}}`
+  );
+
+  Ember.run(() => document.querySelector('.bodymovin').click());
+  assert.equal(this.get('animation').playDirection, 1);
+
+  Ember.run(() => document.querySelector('.bodymovin').click());
+  assert.equal(this.get('animation').playDirection, -1);
+});
+
+test('should change animation.isPaused when `clickAction` is set to `playPause`', function(assert) {
+  assert.expect(2);
+
+  this.render(
+    hbs`{{body-movin path="starwars" setup=(action (mut animation)) clickAction='playPause'}}`
+  );
+
+  Ember.run(() => document.querySelector('.bodymovin').click());
+  assert.equal(this.get('animation').isPaused, 1);
+
+  Ember.run(() => document.querySelector('.bodymovin').click());
+  assert.equal(this.get('animation').isPaused, 0);
+});
+
+test('should loop by default', function(assert) {
+  this.render(
+    hbs`{{body-movin path="starwars" setup=(action (mut animation))}}`
+  );
+
+  assert.equal(this.get('animation').loop, true);
+});
+
+test('should not loop by when `loop` is set to `false`', function(assert) {
+  this.render(
+    hbs`{{body-movin loop=false path="starwars" setup=(action (mut animation))}}`
+  );
+
+  assert.equal(this.get('animation').loop, false);
+});
+
+test('should autoplay by default', function(assert) {
+  this.render(
+    hbs`{{body-movin path="starwars" setup=(action (mut animation))}}`
+  );
+
+  assert.equal(this.get('animation').autoplay, true);
+});
+
+test('should autoplay when `autoplay` is set to `true`', function(assert) {
+  this.render(
+    hbs`{{body-movin autoplay=true path="starwars" setup=(action (mut animation))}}`
+  );
+
+  assert.equal(this.get('animation').autoplay, true);
+});
+
+test('should not autoplay when `autoplay` is set to `false`', function(assert) {
+  assert.expect(2);
+  this.render(
+    hbs`{{body-movin autoplay=false path="starwars" setup=(action (mut animation))}}`
+  );
+
+  assert.equal(this.get('animation').autoplay, false);
+  assert.equal(this.get('animation').isPaused, 1);
+});
