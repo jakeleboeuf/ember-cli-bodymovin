@@ -1,4 +1,5 @@
 [![NPM][npm-badge-img]][npm-badge-link]
+[![Circle CI Status][circle-ci-badge]][circle-ci-url]
 [![Code Climate][codeclimate-badge]][codeclimate-url]
 [![Coverage Status][coverage-badge]][coverage-url]
 [![Ember Observer Score][ember-observer-badge]][ember-observer-url]
@@ -171,3 +172,5 @@ For more information on using ember-cli, visit [http://ember-cli.com/](http://em
 [codeclimate-url]: https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin
 [coverage-badge]: https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin/badges/coverage.svg
 [coverage-url]: https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin/coverage
+[circle-ci-badge]: https://circleci.com/gh/jakeleboeuf/ember-cli-bodymovin.svg?style=shield&circle-token=8f83bc7c5e0fb43f98d9f7189b723cc1a366ebd6
+[circle-ci-url]: https://circleci.com/gh/jakeleboeuf/ember-cli-bodymovin
