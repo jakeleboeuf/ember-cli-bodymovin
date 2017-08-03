@@ -34,12 +34,14 @@ test('should render as svg by default', function(assert) {
 
 test('should render an external path', function(assert) {
   this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true}}`);
+  let done = assert.async();
 
-  return wait().then(() => {
+  setTimeout(() => {
     assert.equal(this.$('svg').length, 1);
     bodymovin.destroy();
     this.clearRender();
-  });
+    done();
+  }, 2000);
 
 });
 
