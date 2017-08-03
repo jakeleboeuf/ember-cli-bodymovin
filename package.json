@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-bodymovin",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A little Ember.js addon to handle svg/canvas animations from After Effects, using Bodymovin.",
   "keywords": [
     "ember-addon"
