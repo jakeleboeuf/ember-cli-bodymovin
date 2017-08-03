@@ -66,7 +66,7 @@ export default Ember.Component.extend({
       animation.play();
     },
 
-    toggle() {
+    playPause() {
       let animation = this.get('animation');
       let state = this.get('state');
 

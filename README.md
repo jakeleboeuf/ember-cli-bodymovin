@@ -39,7 +39,7 @@ Reverse the play direction on click. This is useful for menu animations. It simp
 ```hbs
 {{ body-movin path='menu' clickAction='reverse' loop=false autoplay=false }}
 ```
-![reverse preview](https://d1zjcuqflbd5k.cloudfront.net/files/acc_563268/YGrM6j?response-content-disposition=inline;%20filename=Screen%20Capture%20on%202017-07-31%20at%2016-12-29.gif&Expires=1501533046&Signature=ZVpc-1yUWverelJaUvLvwukAyMTwV0tflFkZAtUBjg-2Qck1rGfAacTlc9C3ENPwxqEFo5uPaOe7PjeDYmk~HodDNyJus0G0Fh17YP04yMUqDOzsVGT91E9i2SRKGD4zH5Qfeelq-WPzAIT9tnPXFdPTSDbqc4V0KueV-YoKngU_&Key-Pair-Id=APKAJTEIOJM3LSMN33SA)
+![reverse preview](http://jklb-os.s3.amazonaws.com/bodymovin/reverse-preview.gif)
 
 #### Play / Pause
 
@@ -48,7 +48,7 @@ Toggling the play state seems like a thing people would want to do. I think? Idk
 {{ body-movin path='reel' clickAction='playPause' }}
 
 ```
-![playPause preview](https://d1zjcuqflbd5k.cloudfront.net/files/acc_563268/L6DOnl?response-content-disposition=inline;%20filename=Screen%20Capture%20on%202017-07-31%20at%2016-24-11.gif&Expires=1501532975&Signature=XGSmrQZL6faz7xKkNAfUJwHgj3SRnDv8j4V~RyLFShjxO6RuAZVWCUwVb1Kk5Jkb9KBinMnTM~c44kdpZ-4wLADZo43C4RHdY8mQFym8LyLJ2XJBbFS4gc~bKKeODM~Gq6wQqnfnadNVvJPymAFNdvq9lUfURY8T0e3hHeCihN8_&Key-Pair-Id=APKAJTEIOJM3LSMN33SA)
+![playPause preview](http://jklb-os.s3.amazonaws.com/bodymovin/playPause-preview.gif)
 
 #### Create your own
 You have the power to create your own actions- just hook into the `click` event.
