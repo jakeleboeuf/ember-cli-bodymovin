@@ -15,24 +15,24 @@ A little wrapper for [Bodymovin](https://github.com/bodymovin/bodymovin), an Aft
 
 Rendering your animation out of AE using the [bodymovin extension](https://github.com/bodymovin/bodymovin#installing-extension-finally-the-plugin-is-on-the-adobe-add-ons) will generate a `json` representation of your animation. COol.
 
-Grab that puppy and drop it into your app's public dir `public/animations/coolFileName.json`. Then all you need to do is drop that sucker onto the page:
+All you need to do is drop your animation file into your app's public dir `public/animations/coolFileName.json` and it's ready to use.
 
 ##### Basic usage
 `{{body-movin path='coolFileName'}}`
 
 ##### External Files
 
-Sometimes you may need or want to host your animation json somewhere else. No problem, just set `external=true` and include the full path.
+Sometimes you may need or want to host your animation `json` somewhere else. No problem, just set `external=true` and include the full path.
 ```
 {{body-movin
-	path='//lab.nearpod.com/bodymovin/demo/pancakes/data.json'
+	path='https://jklb-os.s3.amazonaws.com/bodymovin/menu.json'
 	external=true}}
 ```
 
 ## Interacting with your animation
 You can use any of the Bodymovin.js primitives in your Component/Controller. [Check them out](https://github.com/bodymovin/bodymovin#usage).
 
-We're providing a couple basic features that should help you get things going quickly.
+I'm providing a couple basic features that should help you get things going quickly. Please submit an issue if I'm missing something obvious!
 
 #### Reverse
 Reverse the play direction on click. This is useful for menu animations. It simply will flip the play direction on click.
@@ -42,12 +42,13 @@ Reverse the play direction on click. This is useful for menu animations. It simp
 ![reverse preview](https://d1zjcuqflbd5k.cloudfront.net/files/acc_563268/YGrM6j?response-content-disposition=inline;%20filename=Screen%20Capture%20on%202017-07-31%20at%2016-12-29.gif&Expires=1501533046&Signature=ZVpc-1yUWverelJaUvLvwukAyMTwV0tflFkZAtUBjg-2Qck1rGfAacTlc9C3ENPwxqEFo5uPaOe7PjeDYmk~HodDNyJus0G0Fh17YP04yMUqDOzsVGT91E9i2SRKGD4zH5Qfeelq-WPzAIT9tnPXFdPTSDbqc4V0KueV-YoKngU_&Key-Pair-Id=APKAJTEIOJM3LSMN33SA)
 
 #### Play / Pause
+
 Toggling the play state seems like a thing people would want to do. I think? Idk but here it is:
 ```hbs
-{{ body-movin path='reel' clickAction='toggle' }}
+{{ body-movin path='reel' clickAction='playPause' }}
 
 ```
-![toggle preview](https://d1zjcuqflbd5k.cloudfront.net/files/acc_563268/L6DOnl?response-content-disposition=inline;%20filename=Screen%20Capture%20on%202017-07-31%20at%2016-24-11.gif&Expires=1501532975&Signature=XGSmrQZL6faz7xKkNAfUJwHgj3SRnDv8j4V~RyLFShjxO6RuAZVWCUwVb1Kk5Jkb9KBinMnTM~c44kdpZ-4wLADZo43C4RHdY8mQFym8LyLJ2XJBbFS4gc~bKKeODM~Gq6wQqnfnadNVvJPymAFNdvq9lUfURY8T0e3hHeCihN8_&Key-Pair-Id=APKAJTEIOJM3LSMN33SA)
+![playPause preview](https://d1zjcuqflbd5k.cloudfront.net/files/acc_563268/L6DOnl?response-content-disposition=inline;%20filename=Screen%20Capture%20on%202017-07-31%20at%2016-24-11.gif&Expires=1501532975&Signature=XGSmrQZL6faz7xKkNAfUJwHgj3SRnDv8j4V~RyLFShjxO6RuAZVWCUwVb1Kk5Jkb9KBinMnTM~c44kdpZ-4wLADZo43C4RHdY8mQFym8LyLJ2XJBbFS4gc~bKKeODM~Gq6wQqnfnadNVvJPymAFNdvq9lUfURY8T0e3hHeCihN8_&Key-Pair-Id=APKAJTEIOJM3LSMN33SA)
 
 #### Create your own
 You have the power to create your own actions- just hook into the `click` event.
@@ -55,7 +56,7 @@ You have the power to create your own actions- just hook into the `click` event.
 ```hbs
 {{!-- templates/component/playPause-animation.hbs --}}
 
-{{ body-movin path='reel' setup=(action setup) click=(action toggle) }}
+{{ body-movin path='reel' setup=(action setup) click=(action playPause) }}
 
 ```
 
@@ -75,7 +76,7 @@ export default Ember.Component.extend({
       this.set('animation', data);
     },
 
-    toggle() {
+    playPause() {
       let state = this.get('state');
       let animation = this.get('animation');
 
@@ -105,7 +106,7 @@ You can override all the default stuff as you'd expect.
 	autoplay=false
 	autorender=true
 	rendererSettings=myRendererSettings
-	clickAction="toggle" // toggle or reverse
+	clickAction="playPause" // playPause or reverse
 	click=(action 'submit') // Handle in your component/controller
 	setup=(action 'mySetup') // Handle in your component/controller
 }}
