@@ -33,13 +33,14 @@ test('should render as svg by default', function(assert) {
 });
 
 test('should render an external path', function(assert) {
-  this.render( hbs`{{body-movin path="starwars" setup=(action (mut animation))}}`);
+  this.render(hbs`{{body-movin path="https://jklb-os.s3.amazonaws.com/bodymovin/menu.json" external=true}}`);
 
   return wait().then(() => {
-    assert.equal(this.get('animation').animType, 'svg');
+    assert.equal(this.$('svg').length, 1);
     bodymovin.destroy();
     this.clearRender();
   });
+
 });
 
 test('should render as svg when set', function(assert) {
@@ -54,7 +55,7 @@ test('should render as svg when set', function(assert) {
 
 test('should render as canvas when set', function(assert) {
   this.render(
-    hbs`{{body-movin renderType='canvas' path="filter" setup=(action (mut animation))}}`
+    hbs`{{body-movin renderType='canvas' path="rilter" setup=(action (mut animation))}}`
   );
 
   return wait().then(() => {
