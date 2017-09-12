@@ -1,0 +1,95 @@
+{
+  "name": "jakeleboeuf/ember-cli-bodymovin",
+  "version": "0.1.4",
+  "libraries": {
+    "xv": "^1.1.25"
+  },
+  "title": "Body Movin",
+  "branch": "",
+  "style": {
+    "name": "Brutalist",
+    "componentSet": {
+      "nav": "nav/BasicNav",
+      "header": "header/BasicHeader",
+      "article": "article/MarkdownArticle",
+      "footer": "footer/BasicFooter"
+    },
+    "fontFamily": "Consolas, \"Liberation Mono\", Menlo, Courier, monospace",
+    "heading": {},
+    "typeScale": [
+      48,
+      32,
+      20,
+      18,
+      16,
+      14,
+      12
+    ],
+    "layout": {
+      "maxWidth": 1024,
+      "fluid": true
+    },
+    "colors": {
+      "text": "#333",
+      "background": "#fff",
+      "primary": "#666",
+      "secondary": "#888",
+      "highlight": "#1f80ff",
+      "muted": "#f6f6f6",
+      "border": "#eee"
+    }
+  },
+  "content": [
+    {
+      "component": "nav",
+      "links": [
+        {
+          "href": "https://github.com/jakeleboeuf/ember-cli-bodymovin",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://npmjs.com/package/ember-cli-bodymovin",
+          "text": "npm"
+        }
+      ]
+    },
+    {
+      "component": "header",
+      "heading": "ember-cli-bodymovin",
+      "subhead": "A little Ember.js addon to handle svg/canvas animations from After Effects, using Bodymovin.",
+      "children": [
+        {
+          "component": "ui/TweetButton",
+          "text": "ember-cli-bodymovin: A little Ember.js addon to handle svg/canvas animations from After Effects, using Bodymovin.",
+          "url": ""
+        },
+        {
+          "component": "ui/GithubButton",
+          "user": "jakeleboeuf",
+          "repo": "ember-cli-bodymovin"
+        }
+      ],
+      "text": "v0.1.5"
+    },
+    {
+      "component": "article",
+      "metadata": {
+        "source": "github.readme"
+      },
+      "html": "<p><a href=\"http://badge.fury.io/js/ember-cli-bodymovin\"><img src=\"https://badge.fury.io/js/ember-cli-bodymovin.svg\"></a>\n<a href=\"http://npmcharts.com/compare/ember-cli-bodymovin\"><img src=\"https://img.shields.io/npm/dw/ember-cli-bodymovin.svg\"></a>\n<a href=\"https://circleci.com/gh/jakeleboeuf/ember-cli-bodymovin\"><img src=\"https://img.shields.io/circleci/project/github/jakeleboeuf/ember-cli-bodymovin.svg\"></a>\n<a href=\"https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin\"><img src=\"https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin/badges/gpa.svg\"></a>\n<a href=\"https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin/coverage\"><img src=\"https://codeclimate.com/github/jakeleboeuf/ember-cli-bodymovin/badges/coverage.svg\"></a>\n<a href=\"http://emberobserver.com/addons/ember-cli-bodymovin\"><img src=\"http://emberobserver.com/badges/ember-cli-bodymovin.svg\"></a></p>\n\n<p>A little wrapper for <a href=\"https://github.com/bodymovin/bodymovin\">Bodymovin</a>, an After Effects plugin for exporting animations to svg/canvas/html + js.</p>\n<h2>Installation</h2>\n<p><code>ember install ember-cli-bodymovin</code></p>\n<h2>Usage</h2>\n<p>Rendering your animation out of AE using the <a href=\"https://github.com/bodymovin/bodymovin#installing-extension-finally-the-plugin-is-on-the-adobe-add-ons\">bodymovin extension</a> will generate a <code>json</code> representation of your animation. COol.</p>\n<p>All you need to do is drop your animation file into your app&apos;s public dir <code>public/animations/coolFileName.json</code> and it&apos;s ready to use.</p>\n<h5>Basic usage</h5>\n<p><code>{{body-movin path=&apos;coolFileName&apos;}}</code></p>\n<h5>External Files</h5>\n<p>Sometimes you may need or want to host your animation <code>json</code> somewhere else. No problem, just set <code>external=true</code> and include the full path.</p>\n<pre>{{<span class=\"hljs-keyword\">body</span>-movin\n    path=<span class=\"hljs-symbol\">&apos;https</span>://jklb-os.s3.amazonaws.com/bodymovin/menu.json&apos;\n    external=<span class=\"hljs-literal\">true</span>}}</pre><h2>Interacting with your animation</h2>\n<p>You can use any of the Bodymovin.js primitives in your Component/Controller. <a href=\"https://github.com/bodymovin/bodymovin#usage\">Check them out</a>.</p>\n<p>I&apos;m providing a couple basic features that should help you get things going quickly. Please submit an issue if I&apos;m missing something obvious!</p>\n<h4>Reverse</h4>\n<p>Reverse the play direction on click. This is useful for menu animations. It simply will flip the play direction on click.</p>\n<pre><span class=\"xml\"></span><span class=\"hljs-template-variable\">{{ body-movin path=&apos;menu&apos; clickAction=&apos;reverse&apos; loop=false autoplay=false }}</span><span class=\"xml\"></span></pre><p><img src=\"http://jklb-os.s3.amazonaws.com/bodymovin/reverse-preview.gif\"></p>\n<h4>Play / Pause</h4>\n<p>Toggling the play state seems like a thing people would want to do. I think? Idk but here it is:</p>\n<pre><span class=\"xml\"></span><span class=\"hljs-template-variable\">{{ body-movin path=&apos;reel&apos; clickAction=&apos;playPause&apos; }}</span><span class=\"xml\"></span></pre><p><img src=\"http://jklb-os.s3.amazonaws.com/bodymovin/playPause-preview.gif\"></p>\n<h4>Create your own</h4>\n<p>You have the power to create your own actions- just hook into the <code>click</code> event.</p>\n<pre><span class=\"xml\"></span><span class=\"hljs-comment\">{{!-- templates/component/playPause-animation.hbs --}}</span><span class=\"xml\">\n\n</span><span class=\"hljs-template-variable\">{{ body-movin path=&apos;reel&apos; setup=(<span class=\"hljs-builtin-name\">action</span> setup) click=(<span class=\"hljs-builtin-name\">action</span> playPause) }}</span><span class=\"xml\"></span></pre><pre><span class=\"hljs-comment\">// component/playPause-animation.js</span>\n\n<span class=\"hljs-keyword\">import</span> Ember <span class=\"hljs-keyword\">from</span> <span class=\"hljs-string\">&apos;ember&apos;</span>;\n\n<span class=\"hljs-keyword\">export</span> <span class=\"hljs-keyword\">default</span> Ember.Component.extend({\n  <span class=\"hljs-attr\">animation</span>: <span class=\"hljs-literal\">null</span>,\n  <span class=\"hljs-attr\">state</span>: {\n    <span class=\"hljs-attr\">playing</span>: <span class=\"hljs-literal\">true</span>\n  },\n\n  <span class=\"hljs-attr\">actions</span>: {\n    setup(data) {\n      <span class=\"hljs-keyword\">this</span>.set(<span class=\"hljs-string\">&apos;animation&apos;</span>, data);\n    },\n\n    playPause() {\n      <span class=\"hljs-keyword\">let</span> state = <span class=\"hljs-keyword\">this</span>.get(<span class=\"hljs-string\">&apos;state&apos;</span>);\n      <span class=\"hljs-keyword\">let</span> animation = <span class=\"hljs-keyword\">this</span>.get(<span class=\"hljs-string\">&apos;animation&apos;</span>);\n\n      <span class=\"hljs-keyword\">if</span> (state.playing) {\n        animation.pause();\n        <span class=\"hljs-keyword\">this</span>.set(<span class=\"hljs-string\">&apos;state.playing&apos;</span>, <span class=\"hljs-literal\">false</span>);\n      } <span class=\"hljs-keyword\">else</span> {\n        animation.play();\n        <span class=\"hljs-keyword\">this</span>.set(<span class=\"hljs-string\">&apos;state.playing&apos;</span>, <span class=\"hljs-literal\">true</span>);\n      }\n    }\n\n  }\n\n});</pre><h2>Options</h2>\n<p>You can override all the default stuff as you&apos;d expect.</p>\n<pre>{{body-movin\n    path=<span class=\"hljs-string\">&apos;loading&apos;</span>\n    renderStyle=<span class=\"hljs-string\">&apos;canvas&apos;</span>\n    autoplay=<span class=\"hljs-literal\">false</span>\n    autorender=<span class=\"hljs-literal\">true</span>\n    rendererSettings=myRendererSettings\n    clickAction=<span class=\"hljs-string\">&quot;playPause&quot;</span> <span class=\"hljs-comment\">// playPause or reverse</span>\n    click=(<span class=\"hljs-built_in\">action</span> <span class=\"hljs-string\">&apos;submit&apos;</span>) <span class=\"hljs-comment\">// Handle in your component/controller</span>\n    setup=(<span class=\"hljs-built_in\">action</span> <span class=\"hljs-string\">&apos;mySetup&apos;</span>) <span class=\"hljs-comment\">// Handle in your component/controller</span>\n}}</pre><h4>animation (String)</h4>\n<p>The file name OR url of your animation.</p>\n<h4>external (Boolean)</h4>\n<p>Set this to true if you&apos;re including an external source as your <code>path</code>.</p>\n<h4>renderType (String)</h4>\n<p>Set to &apos;svg&apos; / &apos;canvas&apos; / &apos;html&apos; to set the renderer. If you leave it of, we&apos;ll default to our favorite- <code>SVG</code>.</p>\n<h4>rendererSettings (Object)</h4>\n<p>Some additional renderer settings for max control.</p>\n<pre><span class=\"hljs-attr\">rendererSettings:</span> <span class=\"hljs-string\">{</span>\n<span class=\"hljs-attr\">  context:</span> <span class=\"hljs-string\">canvasContext,</span> <span class=\"hljs-string\">//</span> <span class=\"hljs-string\">the</span> <span class=\"hljs-string\">canvas</span> <span class=\"hljs-string\">context</span>\n<span class=\"hljs-attr\">  scaleMode:</span> <span class=\"hljs-string\">&apos;noScale&apos;</span><span class=\"hljs-string\">,</span>\n<span class=\"hljs-attr\">  clearCanvas:</span> <span class=\"hljs-literal\">false</span><span class=\"hljs-string\">,</span>\n<span class=\"hljs-attr\">  progressiveLoad:</span> <span class=\"hljs-literal\">false</span><span class=\"hljs-string\">,</span> <span class=\"hljs-string\">//</span> <span class=\"hljs-string\">Boolean,</span> <span class=\"hljs-string\">only</span> <span class=\"hljs-string\">svg</span> <span class=\"hljs-string\">renderer,</span> <span class=\"hljs-string\">loads</span> <span class=\"hljs-string\">dom</span> <span class=\"hljs-string\">elements</span> <span class=\"hljs-string\">when</span> <span class=\"hljs-string\">needed.</span> <span class=\"hljs-string\">Might</span> <span class=\"hljs-string\">speed</span> <span class=\"hljs-string\">up</span> <span class=\"hljs-string\">initialization</span> <span class=\"hljs-string\">for</span> <span class=\"hljs-string\">large</span> <span class=\"hljs-string\">number</span> <span class=\"hljs-string\">of</span> <span class=\"hljs-string\">elements.</span>\n<span class=\"hljs-attr\">  hideOnTransparent:</span> <span class=\"hljs-literal\">true</span> <span class=\"hljs-string\">//Boolean,</span> <span class=\"hljs-string\">only</span> <span class=\"hljs-string\">svg</span> <span class=\"hljs-string\">renderer,</span> <span class=\"hljs-string\">hides</span> <span class=\"hljs-string\">elements</span> <span class=\"hljs-string\">when</span> <span class=\"hljs-string\">opacity</span> <span class=\"hljs-string\">reaches</span> <span class=\"hljs-number\">0</span> <span class=\"hljs-string\">(defaults</span> <span class=\"hljs-string\">to</span> <span class=\"hljs-literal\">true</span><span class=\"hljs-string\">)</span>\n<span class=\"hljs-string\">}</span></pre><h4>loop (String)</h4>\n<p>true / false / number</p>\n<h4>autoplay (Boolean)</h4>\n<p>true / false</p>\n<h1>Contributing</h1>\n<p>Hook it up!</p>\n<h2>Running</h2>\n<ul>\n<li><code>ember serve</code></li>\n<li>Visit your app at <a href=\"http://localhost:4200\">http://localhost:4200</a>.</li>\n</ul>\n<h2>Running Tests</h2>\n<ul>\n<li><code>npm test</code> (Runs <code>ember try:each</code> to test your addon against multiple Ember versions)</li>\n<li><code>ember test</code></li>\n<li><code>ember test --server</code></li>\n</ul>\n<h2>Building</h2>\n<ul>\n<li><code>ember build</code></li>\n</ul>\n<p>For more information on using ember-cli, visit <a href=\"http://ember-cli.com/\">http://ember-cli.com/</a>.</p>\n"
+    },
+    {
+      "component": "footer",
+      "links": [
+        {
+          "href": "https://github.com/jakeleboeuf/ember-cli-bodymovin",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://github.com/jakeleboeuf",
+          "text": "jakeleboeuf"
+        }
+      ]
+    }
+  ]
+}
