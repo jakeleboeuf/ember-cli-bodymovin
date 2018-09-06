@@ -37,7 +37,9 @@ export default Ember.Component.extend({
       wrapper: document.getElementById(this.get('elementId'))
     });
 
-    this.sendAction('setup', animation);
+    if (this.setup) {
+      this.setup(animation);
+    }
     this.set('animation', animation);
   },
 
