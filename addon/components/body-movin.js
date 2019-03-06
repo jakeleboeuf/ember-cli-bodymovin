@@ -23,12 +23,13 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
+    let ENV = Ember.getOwner(this).resolveRegistration('config:environment');
     let animation = bodymovin.loadAnimation({
       autoloadSegments: this.get('autoloadSegments'),
       autoplay: this.get('autoplay'),
       loop: this.get('loop'),
       path: !this.get('external')
-        ? `/animations/${this.get('path')}.json`
+        ? `${ENV.rootURL}animations/${this.get('path')}.json`
         : this.get('path'),
       prerender: this.get('prerender'),
       renderer: this.get('renderType'),
@@ -62,7 +63,7 @@ export default Ember.Component.extend({
       let animation = this.get('animation');
       let direction = this.get('state.direction') * -1;
 
-      animation.setDirection(direction)
+      animation.setDirection(direction);
       this.set('state.direction', direction);
 
       animation.play();
@@ -80,6 +81,5 @@ export default Ember.Component.extend({
         this.set('state.playing', true);
       }
     }
-
   }
 });
